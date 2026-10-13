@@ -63,11 +63,30 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ message: 'Server error. Check backend logs and MongoDB connection.' });
 });
 
+// async function start() {
+//   try {
+//     await mongoose.connect(process.env.MONGO_URI || 'mongodb+srv://amanwagh092_db_user:Anam_Wagh_12_hotel@cluster0.srpbowb.mongodb.net/olive_room?retryWrites=true&w=majority&appName=Cluster0');
+//     console.log('MongoDB connected');
+//     app.listen(PORT, () => console.log(`API listening on http://localhost:${PORT}`));
+//   } catch (error) { console.error('MongoDB connection failed:', error.message); process.exit(1); }
+// }
+// start();
+
+
 async function start() {
   try {
-    await mongoose.connect(process.env.MONGO_URI || 'mongodb+srv://amanwagh092_db_user:Anam_Wagh_12_hotel@cluster0.srpbowb.mongodb.net/olive_room?retryWrites=true&w=majority&appName=Cluster0');
-    console.log('MongoDB connected');
-    app.listen(PORT, () => console.log(`API listening on http://localhost:${PORT}`));
-  } catch (error) { console.error('MongoDB connection failed:', error.message); process.exit(1); }
+    await mongoose.connect(process.env.MONGO_URI);
+
+    console.log("MongoDB connected");
+
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`API listening on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("MongoDB connection failed:", error.message);
+    process.exit(1);
+  }
 }
+
 start();
+
