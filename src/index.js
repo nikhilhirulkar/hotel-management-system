@@ -83,6 +83,9 @@ async function start() {
       console.log(`API listening on port ${PORT}`);
     });
   } catch (error) {
+    console.error("MongoDB connection failed:");
+    console.error("Error name:", error.name);
+    console.error("Error code:", error.code);
     console.error("MongoDB connection failed:", error.message);
     process.exit(1);
   }
